@@ -1,19 +1,18 @@
-package com.tudou.toolbarshowhide.ui.activity;
+package com.tudou.toolbarshowhide.test1.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.tudou.toolbarshowhide.R;
-import com.tudou.toolbarshowhide.adapter.RecyclerAdapter;
-import com.tudou.toolbarshowhide.listener.HidingScrollListener;
+import com.tudou.toolbarshowhide.test1.adapter.RecyclerAdapter;
+import com.tudou.toolbarshowhide.test1.listener.HidingScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.tudou.toolbarshowhide.adapter;
+package com.tudou.toolbarshowhide.test1.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tudou.toolbarshowhide.R;
-import com.tudou.toolbarshowhide.adapter.viewholder.RecyclerHeaderViewHolder;
-import com.tudou.toolbarshowhide.adapter.viewholder.RecyclerItemViewHolder;
+import com.tudou.toolbarshowhide.test1.adapter.viewholder.RecyclerHeaderViewHolder;
+import com.tudou.toolbarshowhide.test1.adapter.viewholder.RecyclerItemViewHolder;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.tudou.toolbarshowhide.adapter.viewholder;
+package com.tudou.toolbarshowhide.test2.adapter.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.tudou.toolbarshowhide.listener;
+package com.tudou.toolbarshowhide.test1.listener;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
