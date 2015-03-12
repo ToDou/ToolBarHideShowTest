@@ -44,19 +44,12 @@ public class MainActivity extends ActionBarActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(createItemList());
         recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setOnScrollListener(null);
-    }
-
-    private void hideViews() {
-        mToolbar.animate().translationY(-mToolbar.getHeight()).setInterpolator(new AccelerateInterpolator(2));
-        FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mFabButton.getLayoutParams();
-        int fabBottomMargin = lp.bottomMargin;
-        mFabButton.animate().translationY(mFabButton.getHeight() + fabBottomMargin).setInterpolator(new AccelerateInterpolator(2)).start();
-    }
-
-    private void showViews() {
-        mToolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2));
-        mFabButton.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+        recyclerView.setOnScrollListener(new HidingScrollListener(this) {
+            @Override
+            public void onMoved(int distance) {
+                mToolbar.setTranslationY(-distance);
+            }
+        });
     }
 
     private List<String> createItemList() {
