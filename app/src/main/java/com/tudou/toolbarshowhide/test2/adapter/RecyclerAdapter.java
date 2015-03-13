@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tudou.toolbarshowhide.R;
-import com.tudou.toolbarshowhide.test2.adapter.viewholder.RecyclerHeaderViewHolder;
 import com.tudou.toolbarshowhide.test2.adapter.viewholder.RecyclerItemViewHolder;
 
 import java.util.List;
@@ -16,9 +15,6 @@ import java.util.List;
  * Created by tudou on 15-3-11.
  */
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private static final int TYPE_HEADER = 2;
-    private static final int TYPE_ITEM = 1;
 
     private List<String> mItemList;
 
@@ -29,43 +25,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
-        if (viewType == TYPE_ITEM) {
-            final View view = LayoutInflater.from(context).inflate(R.layout.recycler_item, viewGroup, false);
-            return RecyclerItemViewHolder.newInstance(view);
-        } else if(viewType == TYPE_HEADER) {
-            final View view = LayoutInflater.from(context).inflate(R.layout.recycler_header, viewGroup, false);
-            return new RecyclerHeaderViewHolder(view);
-        }
-        throw new RuntimeException("There is no type that matches the type " + viewType + " + make sure your using types    correctly");
+        final View view = LayoutInflater.from(context).inflate(R.layout.recycler_item, viewGroup, false);
+        return RecyclerItemViewHolder.newInstance(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        if (!isPositionHeader(position)) {
-            RecyclerItemViewHolder holder = (RecyclerItemViewHolder) viewHolder;
-            String itemText = mItemList.get(position - 1);
-            holder.setItemText(itemText);
-        }
-    }
-
-    private int getBasicItemCount() {
-        return mItemList == null ? 0 : mItemList.size();
+        RecyclerItemViewHolder holder = (RecyclerItemViewHolder) viewHolder;
+        String itemText = mItemList.get(position);
+        holder.setItemText(itemText);
     }
 
     @Override
     public int getItemCount() {
-        return getBasicItemCount() + 1;
+        return mItemList == null ? 0 : mItemList.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (isPositionHeader(position)) {
-            return TYPE_HEADER;
-        }
-        return TYPE_ITEM;
-    }
 
-    private boolean isPositionHeader(int position) {
-        return position == 0;
-    }
 }

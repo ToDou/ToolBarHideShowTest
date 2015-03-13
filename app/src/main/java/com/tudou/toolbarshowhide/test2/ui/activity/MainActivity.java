@@ -9,8 +9,10 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.tudou.toolbarshowhide.R;
+import com.tudou.toolbarshowhide.test2.Utils;
 import com.tudou.toolbarshowhide.test2.adapter.RecyclerAdapter;
 import com.tudou.toolbarshowhide.test2.listener.HidingScrollListener;
 
@@ -22,6 +24,8 @@ public class MainActivity extends ActionBarActivity {
 
     private Toolbar mToolbar;
     private ImageButton mFabButton;
+    private LinearLayout mToolbarContainer;
+    private int mToolbarHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         initToolbar();
         mFabButton = (ImageButton) findViewById(R.id.fabButton);
+        mToolbarContainer = (LinearLayout) findViewById(R.id.toolbarContainer);
         initRecyclerView();
     }
 
@@ -37,17 +42,30 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(mToolbar);
         setTitle(getString(R.string.app_name));
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
+        mToolbarHeight = Utils.getToolbarHeight(this);
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        int paddingTop = Utils.getToolbarHeight(this) + Utils.getTabsHeight(this);
+        recyclerView.setPadding(recyclerView.getPaddingLeft(), paddingTop, recyclerView.getPaddingRight(), recyclerView.getPaddingBottom());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(createItemList());
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setOnScrollListener(new HidingScrollListener(this) {
             @Override
             public void onMoved(int distance) {
-                mToolbar.setTranslationY(-distance);
+                mToolbarContainer.setTranslationY(-distance);
+            }
+
+            @Override
+            public void onShow() {
+                mToolbarContainer.animate().translationY(0).setInterpolator(new DecelerateInterpolator(2)).start();
+            }
+
+            @Override
+            public void onHide() {
+                mToolbarContainer.animate().translationY(-mToolbarHeight).setInterpolator(new AccelerateInterpolator(2)).start();
             }
         });
     }
